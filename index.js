@@ -1,7 +1,9 @@
 const { error, info } = require("console");
 const express = require("express");
 const nodemailer = require("nodemailer");
+const job = require("./cron");
 const app = express();
+job.start();
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
