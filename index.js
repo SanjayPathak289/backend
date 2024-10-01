@@ -12,19 +12,18 @@ const transporter = nodemailer.createTransport({
 app.use(express.json());
 app.post("/sendcode", (req, res) => {
     const { email } = req.body;
-    const verificationCode = 123456;
+    const verificationCode = Math.floor(100000 + Math.random() * 900000);
     const mailOptions = {
         from: "sanjaypathak2022@gmail.com",
         to: email,
         subject: "Your verification code",
-        text: "Your verification code is 123456"
+        text: `Your verification code is ${verificationCode}`
     }
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return res.status(500).send({ error: "Failed to send code" });
         }
-        res.status(200).send({
-            message: "Code sent successfully!",
+        return res.status(200).send({
             code: verificationCode
         })
     })
