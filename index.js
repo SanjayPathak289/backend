@@ -13,7 +13,8 @@ const transporter = nodemailer.createTransport({
 })
 app.use(express.json());
 const generateEmailTemplate = (code) => {
-    `<!DOCTYPE html>
+    return (
+        `<!DOCTYPE html>
         <html lang="en">
         <head>
         <meta charset="UTF-8">
@@ -76,6 +77,7 @@ const generateEmailTemplate = (code) => {
         </div>
         </body>
         </html>`
+    )
 }
 app.post("/sendcode", (req, res) => {
     const { email } = req.body;
